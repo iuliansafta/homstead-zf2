@@ -12,6 +12,7 @@ alias serve=serve-laravel
 
 alias xoff='sudo phpdismod -s cli xdebug'
 alias xon='sudo phpenmod -s cli xdebug'
+alias wkhtmltopdf='xvfb-run wkhtmltopdf'
 
 alias nrd="npm run dev"
 alias nrw="npm run watch"

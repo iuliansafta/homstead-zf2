@@ -30,6 +30,8 @@ After it's complete, `vendor/laravel/homestead` will be a git checkout and can b
 
 ## Mac / Linux
 
+```
 function homestead() {
     ( cd ~/Homestead && vagrant $* )
 }
+```

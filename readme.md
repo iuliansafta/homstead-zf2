@@ -17,13 +17,12 @@ Official documentation [is located here](https://laravel.com/docs/homestead).
 
 ## Developing Homestead
 
-To keep any in-development changes separate from other Homestead installations, create a new project and install
-Homestead from composer, forcing it to use a git checkout.
+Clone this repo into your home directory: `git clone https://github.com/iuliansafta/homstead-zf2 ~/Homestead`
+
+## Mac / Linux
 
 ```
-$ mkdir homestead && \
-    cd homestead && \
-    composer require --prefer-source laravel/homestead:dev-master
+function homestead() {
+    ( cd ~/Homestead && vagrant $* )
+}
 ```
-
-After it's complete, `vendor/laravel/homestead` will be a git checkout and can be used normally.

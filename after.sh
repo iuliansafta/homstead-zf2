@@ -24,3 +24,20 @@
 # Install Node.js v10.x
 #curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 #sudo apt-get install -y nodejs
+
+
+echo "Install wkhtmltopdf"
+
+if [ -f /home/vagrant/.homestead-features/wkhtmltopdf ]
+then
+    echo "wkhtmltopdf already installed."
+    exit 0
+fi
+
+sudp touch /home/vagrant/.homestead-features/wkhtmltopdf
+sudo chown -Rf vagrant:vagrant /home/vagrant/.homestead-features
+
+# Install wkhtmltopdf
+
+sudo apt-get update
+sudo apt-get -y install xvfb libfontconfig wkhtmltopdf

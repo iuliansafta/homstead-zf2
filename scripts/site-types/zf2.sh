@@ -61,31 +61,48 @@ block="server {
 
     charset utf-8;
 
+    # CORS support
+    more_set_headers 'Access-Control-Allow-Origin: \$http_origin';
+    more_set_headers 'Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE, HEAD';
+    more_set_headers 'Access-Control-Allow-Credentials: true';
+    more_set_headers 'Access-Control-Allow-Headers: Origin,Content-Type,Accept,Authorization,Authentication-Method-Id';  
+    
     $rewritesTXT
 
     location / {
+        if (\$request_method = 'OPTIONS') {
+            more_set_headers 'Access-Control-Allow-Origin: \$http_origin';
+            more_set_headers 'Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE, HEAD';
+            more_set_headers 'Access-Control-Max-Age: 1728000';
+            more_set_headers 'Access-Control-Allow-Credentials: true';
+            more_set_headers 'Access-Control-Allow-Headers: Origin,Content-Type,Accept,Authorization';
+            more_set_headers 'Content-Type: text/plain; charset=UTF-8';
+            more_set_headers 'Content-Length: 0';
+            return 204;
+        }
+
         try_files \$uri \$uri/ /dispatcher.php?\$query_string;
         $headersTXT
     }
 
     location /img/categories {
-        alias /home/public/disp/categories;
+        alias /home/www/clikd-api/public/categories;
     }
 
     location /img/photos {
-        alias /home/public/disp/photos;
+        alias /home/www/clikd-api/public/photos;
     }
 
     location /img/users {
-        alias /home/public/disp/users;
+        alias /home/www/clikd-api/public/users;
     }
 
     location /img/test-results {
-        alias /home/public/disp/test-results;
+        alias /home/www/clikd-api/public/test-results;
     }
 
     location /downloads {
-        alias /home/private/disp/downloads;
+        alias /home/www/clikd-api/public/downloads;
     }
 
     location = /favicon.ico { access_log off; log_not_found off; }
@@ -114,6 +131,7 @@ block="server {
 
     $configureXhgui
 
+    ssl_session_cache shared:SSL:10m;
     ssl_certificate     /etc/nginx/ssl/$1.crt;
     ssl_certificate_key /etc/nginx/ssl/$1.key;
 }
